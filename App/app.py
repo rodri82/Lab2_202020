@@ -46,8 +46,6 @@ def loadCSVFile (file, sep=";"):
     t1_start = process_time() #tiempo inicial
     dialect = csv.excel()
     dialect.delimiter=sep
-    #with open(file) as csvfile:
-    #    spamreader = csv.reader(csvfile, delimiter=sep)
     with open(file, encoding="utf-8") as csvfile:
         spamreader = csv.DictReader(csvfile, dialect=dialect)
         for row in spamreader: 
@@ -122,6 +120,6 @@ def main():
                     print("Coinciden ",counter," elementos con el crtierio: '", criteria ,"' (en construcción ...)")
             elif int(inputs[0])==0: #opcion 0, salir
                 sys.exit(0)
-
+                
 if __name__ == "__main__":
     main()
