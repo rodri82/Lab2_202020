@@ -44,8 +44,6 @@ class ListTest (unittest.TestCase):
 
     def test_addFirst (self):
         self.lst = slt.newList('ARRAY_LIST')
-        self.assertEqual (slt.isEmpty(self.lst), True)
-        self.assertEqual (slt.size(self.lst), 0)
         slt.addFirst (self.lst, self.book1)
         self.assertEqual (slt.size(self.lst), 1)
         slt.addFirst (self.lst, self.book2)
@@ -56,8 +54,6 @@ class ListTest (unittest.TestCase):
 
     def test_addLast (self):
         self.lst = slt.newList('ARRAY_LIST')
-        self.assertEqual (slt.isEmpty(self.lst), True)
-        self.assertEqual (slt.size(self.lst), 0)
         slt.addLast (self.lst, self.book1)
         self.assertEqual (slt.size(self.lst), 1)
         slt.addLast (self.lst, self.book2)
@@ -70,8 +66,6 @@ class ListTest (unittest.TestCase):
 
     def test_getElement (self):
         self.lst = slt.newList('ARRAY_LIST')
-        self.assertEqual (slt.isEmpty(self.lst), True)
-        self.assertEqual (slt.size(self.lst), 0)
         slt.addLast (self.lst, self.book1)
         self.assertEqual (slt.size(self.lst), 1)
         slt.addLast (self.lst, self.book2)
@@ -83,22 +77,21 @@ class ListTest (unittest.TestCase):
 
     def test_removeFirst (self):
         self.lst = slt.newList('ARRAY_LIST')
-        self.assertEqual (slt.isEmpty(self.lst), True)
-        self.assertEqual (slt.size(self.lst), 0)
         slt.addLast (self.lst, self.book1)
-        self.assertEqual (slt.size(self.lst), 1)
         slt.addLast (self.lst, self.book2)
-        self.assertEqual (slt.size(self.lst), 2)
         slt.removeFirst(self.lst)
         book = slt.getElement(self.lst, 1)
         self.assertEqual (slt.isEmpty(self.lst), False)
         self.assertEqual (slt.size(self.lst), 1)
         self.assertDictEqual (book, self.book2)
+        slt.removeFirst(self.lst)
+        self.assertEqual (slt.isEmpty(self.lst), True)
+        self.assertEqual (slt.size(self.lst), 0)
+        
+
 
     def test_removeLast (self):
         self.lst = slt.newList('ARRAY_LIST')
-        self.assertEqual (slt.isEmpty(self.lst), True)
-        self.assertEqual (slt.size(self.lst), 0)
         slt.addLast (self.lst, self.book1)
         self.assertEqual (slt.size(self.lst), 1)
         slt.addLast (self.lst, self.book2)
@@ -108,11 +101,13 @@ class ListTest (unittest.TestCase):
         self.assertEqual (slt.isEmpty(self.lst), False)
         self.assertEqual (slt.size(self.lst), 1)
         self.assertDictEqual (book, self.book1)
+        slt.removeFirst(self.lst)
+        self.assertEqual (slt.isEmpty(self.lst), True)
+        self.assertEqual (slt.size(self.lst), 0)
+        
 
     def test_insertElement (self):
         self.lst = slt.newList('ARRAY_LIST')
-        self.assertEqual (slt.isEmpty(self.lst), True)
-        self.assertEqual (slt.size(self.lst), 0)
         slt.insertElement (self.lst, self.book1, 1)
         self.assertEqual (slt.size(self.lst), 1)
         slt.insertElement (self.lst, self.book2, 1)

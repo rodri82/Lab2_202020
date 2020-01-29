@@ -25,6 +25,8 @@ import config
 from Sorting import insertionsort as sort
 from DataStructures import listiterator as it
 from ADT import list as slt
+import copy 
+
 
 
 class insertionSortTest (unittest.TestCase):
@@ -81,11 +83,15 @@ class insertionSortTest (unittest.TestCase):
         print ("sorting ....")
         sort.insertionSort (self.lst, self.less)
         iterator = it.newIterator(self.lst)
+        count=0
+        prev_element=None
         while  it.hasNext(iterator):
             element = it.next(iterator)
-            result = "".join(str(key) + ": " + str(value) + ",  " for key, value in element.items())
-            print (result)
-
+            if count > 0:
+                self.assertFalse(self.less(element, prev_element))
+                print("asserting",element, prev_element)
+            count+=1
+            prev_element=copy.copy(element)
 
     def test_invertedElements (self):
         """
@@ -105,8 +111,10 @@ class insertionSortTest (unittest.TestCase):
 
         print ("Inverted list:----------------------------------------------------")
         iterator = it.newIterator(self.lst)
+        count=0
         while  it.hasNext(iterator):
             element = it.next(iterator)
+            count+=1
             result = "".join(str(key) + ": " + str(value) + ",  " for key, value in element.items())
             print (result)
         print ("sorting ....")
