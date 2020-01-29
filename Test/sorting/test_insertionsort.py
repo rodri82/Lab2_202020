@@ -58,6 +58,21 @@ class insertionSortTest (unittest.TestCase):
             return True
         return False
 
+    def verifySorting(self, lista, compFunction):
+        iterator = it.newIterator(lista)
+        count=0
+        prev_element=None
+        while  it.hasNext(iterator):
+            element = it.next(iterator)
+            #result = "".join(str(key) + ": " + str(value) + ",  " for key, value in element.items())
+            #print (result)
+            if count > 0:
+                if compFunction(element, prev_element):
+                    return False
+            count+=1
+            prev_element=copy.copy(element)
+        return True
+
     def test_randomElements (self):
         """
          Lista con elementos en orden aleatorio
@@ -78,20 +93,12 @@ class insertionSortTest (unittest.TestCase):
         iterator = it.newIterator(self.lst)
         while  it.hasNext(iterator):
             element = it.next(iterator)
-            result = "".join(str(key) + ": " + str(value) + ",  " for key, value in element.items())
-            print (result)
-        print ("sorting ....")
+            #result = "".join(str(key) + ": " + str(value) + ",  " for key, value in element.items())
+            #print (result)
+        print ("Sorting ....")
         sort.insertionSort (self.lst, self.less)
-        iterator = it.newIterator(self.lst)
-        count=0
-        prev_element=None
-        while  it.hasNext(iterator):
-            element = it.next(iterator)
-            if count > 0:
-                self.assertFalse(self.less(element, prev_element))
-                print("asserting",element, prev_element)
-            count+=1
-            prev_element=copy.copy(element)
+        self.assertTrue(self.verifySorting(self.lst, self.less))
+    
 
     def test_invertedElements (self):
         """
@@ -119,12 +126,7 @@ class insertionSortTest (unittest.TestCase):
             print (result)
         print ("sorting ....")
         sort.insertionSort (self.lst, self.less)
-        iterator = it.newIterator(self.lst)
-        while  it.hasNext(iterator):
-            element = it.next(iterator)
-            result = "".join(str(key) + ": " + str(value) + ",  " for key, value in element.items())
-            print (result)
-
+        self.assertTrue(self.verifySorting(self.lst, self.less))
 
     def test_orderedElements (self):
         """
@@ -150,11 +152,7 @@ class insertionSortTest (unittest.TestCase):
             print (result)
         print ("sorting ....")
         sort.insertionSort (self.lst, self.less)
-        iterator = it.newIterator(self.lst)
-        while  it.hasNext(iterator):
-            element = it.next(iterator)
-            result = "".join(str(key) + ": " + str(value) + ",  " for key, value in element.items())
-            print (result)
+        self.assertTrue(self.verifySorting(self.lst, self.less))
 
     def test_oneElement (self):
         """
@@ -172,10 +170,7 @@ class insertionSortTest (unittest.TestCase):
         print ("sorting ....")
         sort.insertionSort (self.lst, self.less)
         iterator = it.newIterator(self.lst)
-        while  it.hasNext(iterator):
-            element = it.next(iterator)
-            result = "".join(str(key) + ": " + str(value) + ",  " for key, value in element.items())
-            print (result)
+        self.assertTrue(self.verifySorting(self.lst, self.less))
 
 
 
@@ -207,11 +202,7 @@ class insertionSortTest (unittest.TestCase):
             print (result)
         print ("sorting ....")
         sort.insertionSort (self.lst, self.less)
-        iterator = it.newIterator(self.lst)
-        while  it.hasNext(iterator):
-            element = it.next(iterator)
-            result = "".join(str(key) + ": " + str(value) + ",  " for key, value in element.items())
-            print (result)
+        self.assertTrue(self.verifySorting(self.lst, self.less))
 
 
 
