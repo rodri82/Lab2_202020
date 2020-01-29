@@ -23,31 +23,38 @@
  """
 
 """
-  Este módulo es una aplicación básica con un menú de opciones para cargar datos, contar elementos, y hacer búsquedas sobre una lista.
+  Este módulo es una aplicación básica con un menú de opciones para cargar datos, contar elementos, y hacer búsquedas sobre una lista .
 """
 
 import config as cf
 import sys
 import csv
+from ADT import list as lt
+from DataStructures import listiterator as it
+from DataStructures import liststructure as lt
+
 from time import process_time 
 
-def loadCSVFile (file, lst, sep=";"):
+
+def loadCSVFile (file, sep=";"):
     """
     Carga un archivo csv a una lista
     """
-    del lst[:]
+    #lst = lt.newList("ARRAY_LIST") #Usando implementacion arraylist
+    lst = lt.newList() #Usando implementacion linkedlist
     print("Cargando archivo ....")
     t1_start = process_time() #tiempo inicial
     dialect = csv.excel()
     dialect.delimiter=sep
     #with open(file) as csvfile:
     #    spamreader = csv.reader(csvfile, delimiter=sep)
-    with open(file,encoding="utf-8") as csvfile:
+    with open(file, encoding="utf-8") as csvfile:
         spamreader = csv.DictReader(csvfile, dialect=dialect)
         for row in spamreader: 
-            lst.append(row)
+            lt.addLast(lst,row)
     t1_stop = process_time() #tiempo final
     print("Tiempo de ejecución ",t1_stop-t1_start," segundos")
+    return lst
 
 
 def printMenu():
@@ -65,15 +72,17 @@ def countElementsFilteredByColumn(criteria, column, lst):
     """
     Retorna cuantos elementos coinciden con un criterio para una columna dada  
     """
-    if len(lst)==0:
+    if lst['size']==0:
         print("La lista esta vacía")  
         return 0
     else:
         t1_start = process_time() #tiempo inicial
         counter=0
-        for element in lst:
+        iterator = it.newIterator(lst)
+        while  it.hasNext(iterator):
+            element = it.next(iterator)
             if criteria.lower() in element[column].lower(): #filtrar por palabra clave 
-                counter+=1
+                counter+=1           
         t1_stop = process_time() #tiempo final
         print("Tiempo de ejecución ",t1_stop-t1_start," segundos")
     return counter
@@ -85,26 +94,32 @@ def countElementsByCriteria(criteria, column, lst):
     return 0
 
 def main():
-    lista = [] #instanciar una lista vacia
+    lista = None 
     while True:
         printMenu() #imprimir el menu de opciones en consola
         inputs =input('Seleccione una opción para continuar\n') #leer opción ingresada
         if len(inputs)>0:
             if int(inputs[0])==1: #opcion 1
-                loadCSVFile("Data/test.csv", lista) #llamar funcion cargar datos
-                print("Datos cargados, "+str(len(lista))+" elementos cargados")
+                lista = loadCSVFile("Data/test.csv") #llamar funcion cargar datos
+                print("Datos cargados, ",lista['size']," elementos cargados")
             elif int(inputs[0])==2: #opcion 2
-                if len(lista)==0: #obtener la longitud de la lista
+                if lista==None or lista['size']==0: #obtener la longitud de la lista
                     print("La lista esta vacía")    
-                else: print("La lista tiene "+str(len(lista))+" elementos")
+                else: print("La lista tiene ",lista['size']," elementos")
             elif int(inputs[0])==3: #opcion 3
-                criteria =input('Ingrese el criterio de búsqueda\n')
-                counter=countElementsFilteredByColumn(criteria, "nombre", lista) #filtrar una columna por criterio  
-                print("Coinciden ",counter," elementos con el crtierio: ", criteria  )
+                if lista==None or lista['size']==0: #obtener la longitud de la lista
+                    print("La lista esta vacía")
+                else:   
+                    criteria =input('Ingrese el criterio de búsqueda\n')
+                    counter=countElementsFilteredByColumn(criteria, "nombre", lista) #filtrar una columna por criterio  
+                    print("Coinciden ",counter," elementos con el crtierio: ", criteria  )
             elif int(inputs[0])==4: #opcion 4
-                criteria =input('Ingrese el criterio de búsqueda\n')
-                counter=countElementsByCriteria(criteria,0,lista)
-                print("Coinciden ",counter," elementos con el crtierio: '", criteria ,"' (en construcción ...)")
+                if lista==None or lista['size']==0: #obtener la longitud de la lista
+                    print("La lista esta vacía")
+                else:
+                    criteria =input('Ingrese el criterio de búsqueda\n')
+                    counter=countElementsByCriteria(criteria,0,lista)
+                    print("Coinciden ",counter," elementos con el crtierio: '", criteria ,"' (en construcción ...)")
             elif int(inputs[0])==0: #opcion 0, salir
                 sys.exit(0)
 
