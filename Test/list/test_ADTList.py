@@ -44,25 +44,29 @@ class insertionSortTest (unittest.TestCase):
         pass
 
 
-    def test_randomElements (self):
+    def test_arrayAddFirst (self):
         """
          Lista con elementos en orden aleatorio
         """
-        self.alst = lt.newList('ARRAY_LIST')
-        lt.addFirst (self.alst, self.book5)
-        lt.addFirst (self.alst, self.book3)
-        lt.addFirst (self.alst, self.book1)
-        lt.addFirst (self.alst, self.book2)
-        lt.addFirst (self.alst, self.book4)
-        print (self.alst)
-        print('-----')
-        self.slst = lt.newList()
-        lt.addFirst (self.slst, self.book6)
-        lt.addFirst (self.slst, self.book7)
-        lt.addFirst (self.slst, self.book8)
-        lt.addFirst (self.slst, self.book9)
-        lt.addFirst (self.slst, self.book10)
-        print (self.slst)
+        self.lst = lt.newList('ARRAY_LIST')
+        lt.addFirst (self.lst, self.book1)
+        self.assertEqual (lt.size(self.lst), 1)
+        lt.addFirst (self.lst, self.book2)
+        self.assertEqual (lt.size(self.lst), 2)
+        book = lt.firstElement(self.lst)
+        self.assertDictEqual (book, self.book2)
+
+    def test_listAddFirst (self):
+        """
+         Lista con elementos en orden aleatorio
+        """
+        self.lst = lt.newList()
+        lt.addFirst (self.lst, self.book1)
+        self.assertEqual (lt.size(self.lst), 1)
+        lt.addFirst (self.lst, self.book2)
+        self.assertEqual (lt.size(self.lst), 2)
+        book = lt.firstElement(self.lst)
+        self.assertDictEqual (book, self.book2)
 
 
 if __name__ == "__main__":
