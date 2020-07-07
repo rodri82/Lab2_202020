@@ -25,6 +25,15 @@ from ADT import list as lt
 from DataStructures import listnode as node
 
 def insertionSort (lst, compFunction): 
+    """
+    Insertion sort para una lista genérica con un comparador establecido
+    Args:
+        lst:: Lista
+            Lista sobre la cual se realizara el ordenamiento
+        compFunction
+            Funcion de comparación con la cual se organizaran los datos
+    Return:: None
+    """
     size = lst['size']
     pos1 = 1
     while pos1 <= size:

@@ -27,6 +27,15 @@ from DataStructures import listnode as node
 
 
 def shellSort(lst, compFunction):
+    """
+    shellSort sort para una lista generica con un comparador establecido
+    Args:
+        lst:: List
+            Lista sobre la cual se realizará el ordenamiento
+        compFunction:
+            Funcion de comparación con la cual se organizaran los datos
+    Return :: None
+    """
     n = lt.size(lst)
     h = 1
     while h < n/3:          # Se calcula el tamaño del primer gap. La lista se h-ordena con este tamaño

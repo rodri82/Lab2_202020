@@ -39,6 +39,15 @@ from time import process_time
 def loadCSVFile (file, sep=";"):
     """
     Carga un archivo csv a una lista
+    Args:
+        file
+            Archivo csv del cual se importaran los datos
+        sep = ";"
+            Separador utilizado para determinar cada objeto dentro del archivo
+        Try:
+        Intenta cargar el archivo CSV a la lista que se le pasa por parametro, si encuentra algun error
+        Borra la lista e informa al usuario
+    Returns: None  
     """
     #lst = lt.newList("ARRAY_LIST") #Usando implementacion arraylist
     lst = lt.newList() #Usando implementacion linkedlist
@@ -46,10 +55,13 @@ def loadCSVFile (file, sep=";"):
     t1_start = process_time() #tiempo inicial
     dialect = csv.excel()
     dialect.delimiter=sep
-    with open(file, encoding="utf-8") as csvfile:
-        spamreader = csv.DictReader(csvfile, dialect=dialect)
-        for row in spamreader: 
-            lt.addLast(lst,row)
+    try:
+        with open(file, encoding="utf-8") as csvfile:
+            spamreader = csv.DictReader(csvfile, dialect=dialect)
+            for row in spamreader: 
+                lt.addLast(lst,row)
+    except:
+        print("Hubo un error con la carga del archivo")
     t1_stop = process_time() #tiempo final
     print("Tiempo de ejecución ",t1_stop-t1_start," segundos")
     return lst
@@ -69,6 +81,16 @@ def printMenu():
 def countElementsFilteredByColumn(criteria, column, lst):
     """
     Retorna cuantos elementos coinciden con un criterio para una columna dada  
+    Args:
+        criteria:: str
+            Critero sobre el cual se va a contar la cantidad de apariciones
+        column
+            Columna del arreglo sobre la cual se debe realizar el conteo
+        list
+            Lista en la cual se realizará el conteo, debe estar inicializada
+    Return:
+        counter :: int
+            la cantidad de veces ue aparece un elemento con el criterio definido
     """
     if lst['size']==0:
         print("La lista esta vacía")  
@@ -92,6 +114,13 @@ def countElementsByCriteria(criteria, column, lst):
     return 0
 
 def main():
+    """
+    Método principal del programa, se encarga de manejar todos los metodos adicionales creados
+
+    Instancia una lista vacia en la cual se guardarán los datos cargados desde el archivo
+    Args: None
+    Return: None 
+    """
     lista = None 
     while True:
         printMenu() #imprimir el menu de opciones en consola

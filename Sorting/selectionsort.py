@@ -24,6 +24,15 @@ from ADT import list as lt
 from DataStructures import listnode as node
 
 def selectionSort (lst, compFunction): 
+    """
+    Selection sort para una lista generica con un comparador establecido
+    Args:
+        lst:: List
+            Lista sobre la cual se realizará el ordenamiento
+        compFunction:
+            Funcion de comparación con la cual se organizaran los datos
+    Return :: None
+    """
     size = lst['size']
     pos1 = 1
     while pos1 < size:
