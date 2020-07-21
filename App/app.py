@@ -121,7 +121,7 @@ def main():
     Args: None
     Return: None 
     """
-    lista = None 
+    lista = lt.newList()   # se require usar lista definida
     while True:
         printMenu() #imprimir el menu de opciones en consola
         inputs =input('Seleccione una opción para continuar\n') #leer opción ingresada
