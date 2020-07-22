@@ -38,12 +38,12 @@ def shellSort(lst, compFunction):
     """
     n = lt.size(lst)
     h = 1
-    while h < n/3:          # Se calcula el tamaño del primer gap. La lista se h-ordena con este tamaño
-        h = 3*h + 1         # por ejemplo para n = 100, h toma un valor inical de 13 , 4, 1
+    while h < n//3:       # Se calcula el tamaño del primer gap. La lista se h-ordena con este tamaño
+        h = 3*h + 1         # por ejemplo para n = 100, h toma un valor inicial de 40, 13 , 4, 1
     while (h >= 1):
-        for i in range (h,n):
+        for i in range (h+1,n+1):  # posiciones validas para comparar con elementos a h-distancia a la izquierda
             j = i
-            while (j>=h) and compFunction (lt.getElement(lst,j+1),lt.getElement(lst,j-h+1)):
-                lt.exchange (lst, j+1, j-h+1)
-                j -=h
-        h //=3              # h se decrementa en un tercio. cuando h es igual a 1, se comporta como insertionsort
+            while (j>=(h+1)) and compFunction (lt.getElement(lst,j),lt.getElement(lst,j-h)) < 0:
+                lt.exchange (lst, j, j-h)
+                j -= h
+        h //= 3              # h se decrementa en un tercio. cuando h es 1, se comporta como insertionsort
