@@ -26,11 +26,6 @@
 def newSingleNode (element):
   """
   Estructura que contiene la información a guardar en una lista encadenada
-  Args:
-    Element
-      Elemento que se desea almacenar en el nodo creado
-  Return
-    Nodo con la información que se suministra por parámetro
   """
   node = {'info':element,'next':None}
   return (node)
@@ -39,24 +34,12 @@ def newSingleNode (element):
 
 def getElement (node):
   """
-  Estructura que contiene la información a guardar en una lista encadenada
+  Retorna la información de un nodo
   Args:
-    Node
-      Nodo del cual se desea saber su contenido
-  Return
-    Elemento dentro del nodo pasado por parametro
+    node: El nodo a examinar
+  Returns:
+    La información almacenada en el nodo
   """
   return node ['info']
 
 
-def newDoubleNode (element):
-  """
-  Estructura que contiene la información a guardar en una lista encadenada doblemente
-  Args::
-    element
-      Elemento que se desea agregar al nodo
-  Return
-    Nodo con las posibilidad de doble encadenación (Disponibilidad de añadir nodos antes y despues)
-  """
-  node = {'info':element,'next':None, 'prev':None}
-  return (node)
