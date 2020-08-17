@@ -113,6 +113,12 @@ def countElementsByCriteria(criteria, column, lst):
     """
     return 0
 
+def orderElementsByCriteria(function, column, lst, elements):
+    """
+    Retorna una lista con cierta cantidad de elementos ordenados por el criterio
+    """
+    return 0
+
 def main():
     """
     Método principal del programa, se encarga de manejar todos los metodos adicionales creados
